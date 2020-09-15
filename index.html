@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Pathfinding_Visualizer_OOP</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title-container">Dijkstra Algorithm Visualizer</div>
+      <div class="buttons-div">
+        <div class="start-algorithm" id="dijkstra">Start Algorithm</div>
+        <div class="clear" id="clearBtn">Clear</div>
+        <div class="speed-slider-container">
+          <div class="speed-name">Speed :</div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="1"
+              max="50"
+              value="10"
+              id="speedSlider"
+              class="slider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-box">
+      <div id="grid-container" class="grid-container"></div>
+    </div>
+
+    <script src="Board.js"></script>
+    <script src="Algorithm/DijkstraAlgorithm.js"></script>
+    <script src="animation/startAnimationfile.js"></script>
+  </body>
+</html>
