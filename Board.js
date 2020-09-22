@@ -86,6 +86,10 @@ class Board {
             currentNode.status = "wall";
           }
           if (this.startNodeMoving) {
+            if (currentNode.status == "wall") {
+              currentElement.classList.remove("wall");
+            }
+
             currentElement.classList.add("StartPoint");
             currentNode.status = "startNode";
             let temp = currentId.split("-");
@@ -93,6 +97,9 @@ class Board {
             this.startNode[1] = parseInt(temp[1]);
           }
           if (this.endNodeMoving) {
+            if (currentNode.status == "wall") {
+              currentElement.classList.remove("wall");
+            }
             currentElement.classList.add("EndPoint");
             currentNode.status = "endNode";
             let temp = currentId.split("-");
