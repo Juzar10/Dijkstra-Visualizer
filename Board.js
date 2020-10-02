@@ -9,6 +9,7 @@ class Board {
     this.startNodeMoving = false;
     this.endNodeMoving = false;
     this.wallDrawing = false;
+    this.algorithmDone = false;
     this.startNode = [3, 5];
     this.endNode = [6, 7];
     this.speed = slider.value;
@@ -43,6 +44,35 @@ class Board {
       }
       document.getElementById("grid-container").appendChild(divOfRow);
       this.arrayOfNodes.push(arrayOfRow);
+    }
+  }
+
+  quickAlgorithm() {
+    quickDijkstra(
+      this.startNode,
+      this.endNode,
+      this.arrayOfNodes,
+      this.rows,
+      this.cols
+    );
+  }
+
+  clear() {
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        document.getElementById(r + "-" + c).classList.remove("visited_color");
+        document
+          .getElementById(r + "-" + c)
+          .classList.remove("quick_visited_color");
+        document.getElementById(r + "-" + c).classList.remove("path_color");
+        document
+          .getElementById(r + "-" + c)
+          .classList.remove("quick_path_color");
+
+        this.arrayOfNodes[r][c].distance = Infinity;
+        this.arrayOfNodes[r][c].visited = false;
+        this.arrayOfNodes[r][c].previousNode = null;
+      }
     }
   }
 
@@ -95,6 +125,11 @@ class Board {
             let temp = currentId.split("-");
             this.startNode[0] = parseInt(temp[0]);
             this.startNode[1] = parseInt(temp[1]);
+
+            if (this.algorithmDone) {
+              this.clear();
+              this.quickAlgorithm();
+            }
           }
           if (this.endNodeMoving) {
             if (currentNode.status == "wall") {
@@ -105,6 +140,11 @@ class Board {
             let temp = currentId.split("-");
             this.endNode[0] = parseInt(temp[0]);
             this.endNode[1] = parseInt(temp[1]);
+
+            if (this.algorithmDone) {
+              this.clear();
+              this.quickAlgorithm();
+            }
           }
         };
 
@@ -134,6 +174,7 @@ class Board {
       document.getElementById("clearBtn").onclick = () => {
         document.getElementById("grid-container").innerHTML = "";
         this.arrayOfNodes = [];
+        this.algorithmDone = false;
         this.creategrid();
         this.addEventListener();
       };

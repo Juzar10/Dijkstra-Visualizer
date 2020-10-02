@@ -73,6 +73,14 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
+
+.quick_visited_color {
+  background-color: rgb(224, 171, 92);
+}
+.quick_path_color {
+  background-color: rgb(228, 231, 46);
+}
+
 .path_color {
   background-color: rgb(228, 231, 46);
   animation-name: path_animation;

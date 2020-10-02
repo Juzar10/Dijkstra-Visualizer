@@ -1,5 +1,4 @@
-function dijkstra(startNode, endNode, arrayOfNodes, rows, cols) {
-  newBoard.algorithmDone = true;
+function quickDijkstra(startNode, endNode, arrayOfNodes, rows, cols) {
   let priority_queue = [];
   let visited = [];
   let isPathFound = false;
@@ -25,7 +24,7 @@ function dijkstra(startNode, endNode, arrayOfNodes, rows, cols) {
       isPathFound = true;
       visited.push([firstPriorityQueueNode.r, firstPriorityQueueNode.c]);
 
-      startAnimation(visited, arrayOfNodes, isPathFound);
+      colorElements(visited, arrayOfNodes, isPathFound);
       return;
     }
 
@@ -62,5 +61,46 @@ function dijkstra(startNode, endNode, arrayOfNodes, rows, cols) {
     ] = firstPriorityQueueNode;
     priority_queue.splice(0, 1);
   }
-  startAnimation(visited, arrayOfNodes, isPathFound);
+  colorElements(visited, arrayOfNodes, isPathFound);
+}
+
+function colorElements(visited, arrayOfNodes, isPathFound) {
+  visited = visited;
+  arrayOfNodes = arrayOfNodes;
+  colorVisited(visited);
+  if (isPathFound) {
+    colorPath(visited, arrayOfNodes);
+  } else {
+    alert("no path found");
+  }
+
+  function colorVisited(visited) {
+    for (let i = 1; i < visited.length - 1; i++) {
+      let x = visited[i][0];
+      let y = visited[i][1];
+
+      document.getElementById(x + "-" + y).className += " quick_visited_color";
+    }
+  }
+
+  function colorPath(visited, arrayOfNodes) {
+    lastNode = visited[visited.length - 1];
+    path = [];
+    for (let i = visited.length - 2; i > -1; i--) {
+      let str1 = arrayOfNodes[lastNode[0]][lastNode[1]].previousNode;
+      let str2 = arrayOfNodes[visited[i][0]][visited[i][1]].id;
+
+      if (str1.localeCompare(str2) == 0) {
+        path.push([visited[i][0], visited[i][1]]);
+        lastNode = [visited[i][0], visited[i][1]];
+      }
+    }
+
+    for (let i = path.length - 2; i > -1; i--) {
+      let x = path[i][0];
+      let y = path[i][1];
+
+      document.getElementById(x + "-" + y).className += " quick_path_color";
+    }
+  }
 }
