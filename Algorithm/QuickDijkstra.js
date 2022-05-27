@@ -79,6 +79,11 @@ function colorElements(visited, arrayOfNodes, isPathFound) {
       let x = visited[i][0];
       let y = visited[i][1];
 
+      document.getElementById(x + "-" + y).classList.remove("path_up")
+      document.getElementById(x + "-" + y).classList.remove("path_down")
+      document.getElementById(x + "-" + y).classList.remove("path_left")
+      document.getElementById(x + "-" + y).classList.remove("path_right")
+
       document.getElementById(x + "-" + y).className += " quick_visited_color";
     }
   }
@@ -95,12 +100,41 @@ function colorElements(visited, arrayOfNodes, isPathFound) {
         lastNode = [visited[i][0], visited[i][1]];
       }
     }
+    path.unshift(newBoard.endNode);
 
-    for (let i = path.length - 2; i > -1; i--) {
+
+    for (let i = path.length - 2; i > 0; i--) {
       let x = path[i][0];
       let y = path[i][1];
+      console.log("i" , i)
+      console.log(path)
+      let previous_x = path[i - 1][0];
+      let previous_y = path[i - 1][1];
+      console.log(x,y)
+      console.log(previous_x,previous_y)
 
-      document.getElementById(x + "-" + y).className += " quick_path_color";
+      
+        if (previous_x - x == -1 && previous_y - y == 0) {
+          document.getElementById(x + "-" + y).classList.remove("quick_visited_color")
+          document.getElementById(x + "-" + y).className += " path_up";
+        }
+
+        if (previous_x - x == 1 && previous_y - y == 0) {
+          document.getElementById(x + "-" + y).classList.remove("quick_visited_color")
+          document.getElementById(x + "-" + y).className += " path_down";
+        }
+
+        if (previous_x - x == 0 && previous_y - y == -1) {
+          document.getElementById(x + "-" + y).classList.remove("quick_visited_color")
+          document.getElementById(x + "-" + y).className += " path_left";
+        }
+
+        if (previous_x - x == 0 && previous_y - y == 1) {
+          console.log("hi" , previous_x ,x,previous_y,y)
+          document.getElementById(x + "-" + y).classList.remove("quick_visited_color")
+          document.getElementById(x + "-" + y).className += " path_right";
+        }
+      // document.getElementById(x + "-" + y).className += " quick_path_color";
     }
   }
 }

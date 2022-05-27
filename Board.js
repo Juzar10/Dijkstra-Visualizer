@@ -112,6 +112,11 @@ class Board {
             currentNode.status != "startNode" &&
             currentNode.status != "endNode"
           ) {
+            currentElement.classList.remove("path_left")
+            currentElement.classList.remove("path_right")
+            currentElement.classList.remove("path_up")
+            currentElement.classList.remove("path_down")
+
             currentElement.classList.add("wall");
             currentNode.status = "wall";
           }

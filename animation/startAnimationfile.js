@@ -39,39 +39,31 @@ function startAnimation(visited, arrayOfNodes, isPathFound) {
     path.unshift(newBoard.endNode);
 
     for (let i = path.length - 2; i > 0; i--) {
+      console.log(path)
       let x = path[i][0];
       let y = path[i][1];
-
-      console.log(path);
 
       let previous_x = path[i - 1][0];
       let previous_y = path[i - 1][1];
 
       setTimeout(() => {
         if (previous_x - x == -1 && previous_y - y == 0) {
-          console.log(previous_x, previous_y);
-          console.log("down");
+          document.getElementById(x + "-" + y).classList.remove("visited_color")
           document.getElementById(x + "-" + y).className += " path_up";
         }
 
         if (previous_x - x == 1 && previous_y - y == 0) {
-          console.log(previous_x, previous_y);
-
-          console.log("up");
+          document.getElementById(x + "-" + y).classList.remove("visited_color")
           document.getElementById(x + "-" + y).className += " path_down";
         }
 
         if (previous_x - x == 0 && previous_y - y == -1) {
-          console.log(previous_x, previous_y);
-
-          console.log("right");
+          document.getElementById(x + "-" + y).classList.remove("visited_color")
           document.getElementById(x + "-" + y).className += " path_left";
         }
 
         if (previous_x - x == 0 && previous_y - y == 1) {
-          console.log(previous_x, previous_y);
-
-          console.log("left");
+          document.getElementById(x + "-" + y).classList.remove("visited_color")
           document.getElementById(x + "-" + y).className += " path_right";
         }
       }, (delay += parseInt(newBoard.speed) * 3));
